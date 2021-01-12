@@ -1,7 +1,6 @@
 import RPi.GPIO as GPIO
 import time
 
-
 class LED():
 
     GPIO_PINS = []
@@ -15,7 +14,7 @@ class LED():
         GPIO.setwarnings(False)
 
         GPIO.setup(self.GPIO_PIN, GPIO.OUT)
-        GPIO.setup(self.GPIO_PIN, GPIO.LOW)
+
         if self.GPIO_PIN not in self.GPIO_PINS:
             self.GPIO_PINS.append(self.GPIO_PIN)
 
