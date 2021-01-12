@@ -4,7 +4,7 @@ import time, sys
 import plants
 import LED
 
-def main(plant: plants.Plant, dht_sensor):
+def main(plant: plants.Plant, dht_sensor: DHT22):
     while True:
         try:
             result = dht_sensor.read()
