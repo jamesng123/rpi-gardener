@@ -10,6 +10,15 @@ class Plant():
         self.temperature = temperature
         self.moisture = moisture
 
+        if temperature[0] >= temperature[1]:
+            raise Exception("The lower temperature threshold comes first")
+
+        if humidity[0] >= humidity[1]:
+            raise Exception("The lower humidity threshold comes first")
+
+        if moisture[0] >= moisture[1]:
+            raise Exception("The lower moisture threshold comes first")
+
     def check_temperature(self, current_temp: float):
         
         """ Checks the temperature of the plant. Performs actions to bring the temperature within a specified range """
@@ -74,3 +83,7 @@ class Plant():
         #     print(current_temperature)
         #     time.sleep(1)
         # print("cooled!")
+
+    def water(self):
+        #TODO Implement logic for controlling the water pump
+        pass
