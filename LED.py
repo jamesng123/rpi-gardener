@@ -3,37 +3,37 @@ import time
 
 class LED():
 
-    GPIO_PINS = []
+    gpio_pins = []
 
-    def __init__(self, GPIO_PIN, colour):
-        self.GPIO_PIN = GPIO_PIN
+    def __init__(self, gpio, colour):
+        self.gpio = gpio
         self.colour = colour
 
         # Initialse the GPIO pins and LEDs
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
 
-        GPIO.setup(self.GPIO_PIN, GPIO.OUT)
+        GPIO.setup(self.gpio, GPIO.OUT)
 
-        if self.GPIO_PIN not in self.GPIO_PINS:
-            self.GPIO_PINS.append(self.GPIO_PIN)
+        if self.gpio not in self.gpio_pins:
+            self.gpio_pins.append(self.gpio)
 
     def turn_on(self):
 
         """ Turns on the specified LED """
 
-        GPIO.output(self.GPIO_PIN, GPIO.HIGH)
+        GPIO.output(self.gpio, GPIO.HIGH)
     
     def turn_off(self):
 
         """ Turns off the specified LED """
 
-        GPIO.output(self.GPIO_PIN, GPIO.LOW)
+        GPIO.output(self.gpio, GPIO.LOW)
 
     @classmethod
     def turn_off_all_leds(cls):
 
         """ Turns off all LEDs that are currently on """
 
-        for i in cls.GPIO_PINS:
+        for i in cls.gpio_pins:
             GPIO.output(i, GPIO.LOW)
