@@ -2,7 +2,7 @@ from pigpio_dht import DHT22
 from datetime import datetime
 import time, sys
 import plants
-import LED
+from LED import LED
 
 def main(plant: plants.Plant, dht_sensor: DHT22):
     while True:
@@ -19,7 +19,7 @@ def main(plant: plants.Plant, dht_sensor: DHT22):
                 time.sleep(10)
         
         except KeyboardInterrupt:
-            LED.LED.turn_off_all_leds()
+            LED.turn_off_all_leds()
             sys.exit(0)
 
 if __name__ == '__main__':

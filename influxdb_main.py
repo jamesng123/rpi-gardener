@@ -2,7 +2,7 @@ from pigpio_dht import DHT22
 from datetime import datetime
 import time, sys
 import plants
-import LED
+from LED import LED
 from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
 # You can generate a Token from the "Tokens Tab" in the UI
@@ -29,7 +29,7 @@ def main(plant: plants.Plant, dht_sensor: DHT22):
                 plant.check_temperature(result['temp_c'])
 
         except KeyboardInterrupt:
-            LED.LED.turn_off_all_leds()
+            LED.turn_off_all_leds()
             sys.exit(0)
 
 if __name__ == '__main__':
