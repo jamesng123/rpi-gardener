@@ -45,6 +45,9 @@ class Plant():
             red.turn_on()            
 
     def check_humidity(self, current_humidity: float):
+
+        """ Checks the humidity of the plant. Performs actions to bring the humidity within a specified range """
+
         if self.humidity[0] <= current_humidity <= self.humidity[1]:
             pass # This is the desired state
         elif current_humidity < self.humidity[0]:
@@ -55,6 +58,9 @@ class Plant():
             pass
 
     def check_moisture(self, current_moisture: float):
+
+        """ Checks the moisture of the plant. Performs actions to bring the moisture within a specified range """
+
         if self.moisture[0] <= current_moisture <= self.moisture[1]:
             pass # This is the desired state
         elif current_moisture < self.moisture[0]:
@@ -66,6 +72,9 @@ class Plant():
             pass
 
     def heat_up(self, current_temperature):
+
+        """ Increases the temperature for the plant """
+
         #TODO Implement logic for heating up
         print("heating up....")
         # while current_temperature < self.temperature[0]:
@@ -77,6 +86,9 @@ class Plant():
         
 
     def cool_down(self, current_temperature):
+
+        """ Decreases the temperature for the plant """
+
         #TODO Implement logic for cooling down
         print("cooling down....")
         # while current_temperature > self.temperature[1]:
@@ -86,5 +98,8 @@ class Plant():
         # print("cooled!")
 
     def water(self):
+
+        """ Releases water for the plant """
+
         #TODO Implement logic for controlling the water pump
         pass

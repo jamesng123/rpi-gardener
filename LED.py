@@ -19,12 +19,21 @@ class LED():
             self.GPIO_PINS.append(self.GPIO_PIN)
 
     def turn_on(self):
+
+        """ Turns on the specified LED """
+
         GPIO.output(self.GPIO_PIN, GPIO.HIGH)
     
     def turn_off(self):
+
+        """ Turns off the specified LED """
+
         GPIO.output(self.GPIO_PIN, GPIO.LOW)
 
     @classmethod
     def turn_off_all_leds(cls):
+
+        """ Turns off all LEDs that are currently on """
+
         for i in cls.GPIO_PINS:
             GPIO.output(i, GPIO.LOW)
