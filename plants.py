@@ -1,6 +1,7 @@
 import time
 import RPi.GPIO as GPIO
-import LED
+from LED import LED
+from water_pump import WaterPump
 
 class Plant():
 
@@ -28,7 +29,7 @@ class Plant():
             # This is the desired state
             print("this is desired")
 
-            LED.LED.turn_off_all_leds()
+            LED.turn_off_all_leds()
             green = LED.LED(18, "green")
             green.turn_on()
 
@@ -40,7 +41,7 @@ class Plant():
         else:
             print("this is too hot, the range is: ", self.temperature)
             self.cool_down(current_temp)
-            LED.LED.turn_off_all_leds()
+            LED.turn_off_all_leds()
             red = LED.LED(23, "red")
             red.turn_on()            
 
