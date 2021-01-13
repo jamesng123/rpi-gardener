@@ -62,6 +62,7 @@ class Plant():
             pass
         else:
             #TODO Implement logic for decreasing the moisture
+            # Although this should never hit I don't think?
             pass
 
     def heat_up(self, current_temperature):
