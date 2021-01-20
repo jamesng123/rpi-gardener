@@ -1,3 +1,4 @@
+from pigpio_dht import DHT22
 from datetime import datetime
 import time, sys
 from plants import Plant
