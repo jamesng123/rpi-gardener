@@ -59,9 +59,9 @@ class Plant():
             # Desired...
             pass
         else:
-            WaterPump.water()
+            water()
 
-    def heat_up(self, current_temperature):
+    def heat_up(self, current_temperature: float):
         """ Increases the temperature for the plant """
 
         # TODO Implement logic for heating up
@@ -73,7 +73,7 @@ class Plant():
         #
         # print("warmed!")
 
-    def cool_down(self, current_temperature):
+    def cool_down(self, current_temperature: float):
         """ Decreases the temperature for the plant """
 
         # TODO Implement logic for cooling down
