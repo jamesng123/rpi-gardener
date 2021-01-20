@@ -3,25 +3,20 @@ import RPi.GPIO as GPIO
 from LED import LED
 from water_pump import WaterPump
 
+
 class Plant():
 
-    def __init__(self, name: str, humidity: tuple, temperature: tuple, moisture: tuple):
+    def __init__(self, name: str, humidity: tuple, temperature: tuple, moisture: boolean):
         self.name = name
         self.humidity = humidity
         self.temperature = temperature
         self.moisture = moisture
 
-        if temperature[0] >= temperature[1]:
-            raise Exception("The lower temperature threshold comes first")
+        assert temperature[0] < temperature[1], "The lower temperature threshold comes first"
 
-        if humidity[0] >= humidity[1]:
-            raise Exception("The lower humidity threshold comes first")
-
-        if moisture[0] >= moisture[1]:
-            raise Exception("The lower moisture threshold comes first")
+        assert humidity[0] < humidity[1], "The lower humidity threshold comes first"
 
     def check_temperature(self, current_temp: float):
-        
         """ Checks the temperature of the plant. Performs actions to bring the temperature within a specified range """
 
         if self.temperature[0] <= current_temp <= self.temperature[1]:
@@ -37,46 +32,39 @@ class Plant():
 
             print("this is too cold, the range is: ", self.temperature)
             self.heat_up(current_temp)
-            
+
         else:
             print("this is too hot, the range is: ", self.temperature)
             self.cool_down(current_temp)
             LED.turn_off_all_leds()
             red = LED.LED(23, "red")
-            red.turn_on()            
+            red.turn_on()
 
     def check_humidity(self, current_humidity: float):
-
         """ Checks the humidity of the plant. Performs actions to bring the humidity within a specified range """
 
         if self.humidity[0] <= current_humidity <= self.humidity[1]:
-            pass # This is the desired state
+            pass  # This is the desired state
         elif current_humidity < self.humidity[0]:
-            #TODO Implement logic for increasing the humidity
+            # TODO Implement logic for increasing the humidity
             pass
         else:
-            #TODO Implement logic for decreasing the humidity
+            # TODO Implement logic for decreasing the humidity
             pass
 
     def check_moisture(self, current_moisture: float):
-
         """ Checks the moisture of the plant. Performs actions to bring the moisture within a specified range """
 
-        if self.moisture[0] <= current_moisture <= self.moisture[1]:
-            pass # This is the desired state
-        elif current_moisture < self.moisture[0]:
-            #TODO Implement logic for increasing the moisture
+        if self.moisture:
+            # Desired...
             pass
         else:
-            #TODO Implement logic for decreasing the moisture
-            # Although this should never hit I don't think?
-            pass
+            WaterPump.water()
 
     def heat_up(self, current_temperature):
-
         """ Increases the temperature for the plant """
 
-        #TODO Implement logic for heating up
+        # TODO Implement logic for heating up
         print("heating up....")
         # while current_temperature < self.temperature[0]:
         #     current_temperature += 1
@@ -84,13 +72,11 @@ class Plant():
         #     time.sleep(1)
         #
         # print("warmed!")
-        
 
     def cool_down(self, current_temperature):
-
         """ Decreases the temperature for the plant """
 
-        #TODO Implement logic for cooling down
+        # TODO Implement logic for cooling down
         print("cooling down....")
         # while current_temperature > self.temperature[1]:
         #     current_temperature -= 1
@@ -99,8 +85,7 @@ class Plant():
         # print("cooled!")
 
     def water(self):
-
         """ Releases water for the plant """
 
-        #TODO Implement logic for controlling the water pump
+        # TODO Implement logic for controlling the water pump
         pass
