@@ -1,13 +1,12 @@
-from pigpio_dht import DHT22
 from datetime import datetime
 import time, sys
-import plants
+from plants import Plant
 from LED import LED
 
-def main(plant: plants.Plant, dht_sensor: DHT22):
+def main(plant: Plant):
     while True:
         try:
-            result = dht_sensor.read()
+            result = plant.sensor.read()
             now = datetime.now()
             current_time = now.strftime("%H:%M:%S")
             f_data = f"Current Time: {current_time} - Temp: {result['temp_c']} - Humidity: {result['humidity']}\n"
@@ -24,7 +23,6 @@ def main(plant: plants.Plant, dht_sensor: DHT22):
 
 if __name__ == '__main__':
     
-    basil = plants.Plant("Basil", humidity=(15, 25), temperature=(15, 26.5), moisture=(0, 100))
-    sensor = DHT22(4)
+    basil = Plant("Basil", humidity=(15, 25), temperature=(15, 26.5), moisture=True, sensor=DHT22(4))
 
-    main(basil, sensor)
+    main(basil)

@@ -2,15 +2,17 @@ import time
 import RPi.GPIO as GPIO
 from LED import LED
 from water_pump import WaterPump
+from pigpio_dht import DHT22
 
 
 class Plant():
 
-    def __init__(self, name: str, humidity: tuple, temperature: tuple, moisture: boolean):
+    def __init__(self, name: str, humidity: tuple, temperature: tuple, moisture: boolean, sensor: DHT22):
         self.name = name
         self.humidity = humidity
         self.temperature = temperature
         self.moisture = moisture
+        self.sensor = sensor
 
         assert temperature[0] < temperature[1], "The lower temperature threshold comes first"
 
