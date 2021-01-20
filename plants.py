@@ -2,8 +2,6 @@ import time
 import RPi.GPIO as GPIO
 from LED import LED
 from water_pump import WaterPump
-from pigpio_dht import DHT22
-
 
 class Plant():
 
