@@ -52,7 +52,7 @@ class Plant():
             # TODO Implement logic for decreasing the humidity
             pass
 
-    def check_moisture(self, current_moisture: float):
+    def check_moisture(self, current_moisture: boolean):
         """ Checks the moisture of the plant. Performs actions to bring the moisture within a specified range """
 
         if self.moisture:
