@@ -2,10 +2,12 @@ import time
 import RPi.GPIO as GPIO
 from LED import LED
 from water_pump import WaterPump
+from pigpio_dht import DHT22
+
 
 class Plant():
 
-    def __init__(self, name: str, humidity: tuple, temperature: tuple, moisture: boolean, sensor: DHT22):
+    def __init__(self, name: str, humidity: tuple, temperature: tuple, moisture: bool, sensor: DHT22):
         self.name = name
         self.humidity = humidity
         self.temperature = temperature
@@ -25,7 +27,7 @@ class Plant():
             print("this is desired")
 
             LED.turn_off_all_leds()
-            green = LED.LED(18, "green")
+            green = LED(18, "green")
             green.turn_on()
 
         elif current_temp < self.temperature[0]:
@@ -37,7 +39,7 @@ class Plant():
             print("this is too hot, the range is: ", self.temperature)
             self.cool_down(current_temp)
             LED.turn_off_all_leds()
-            red = LED.LED(23, "red")
+            red = LED(23, "red")
             red.turn_on()
 
     def check_humidity(self, current_humidity: float):
@@ -52,14 +54,14 @@ class Plant():
             # TODO Implement logic for decreasing the humidity
             pass
 
-    def check_moisture(self, current_moisture: boolean):
+    def check_moisture(self, current_moisture: bool):
         """ Checks the moisture of the plant. Performs actions to bring the moisture within a specified range """
 
         if self.moisture:
             # Desired...
             pass
         else:
-            water()
+            self.water()
 
     def heat_up(self, current_temperature: float):
         """ Increases the temperature for the plant """
@@ -86,6 +88,6 @@ class Plant():
 
     def water(self):
         """ Releases water for the plant """
-
+        print("Water")
         # TODO Implement logic for controlling the water pump
         pass
