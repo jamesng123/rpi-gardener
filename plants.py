@@ -7,12 +7,15 @@ from pigpio_dht import DHT22
 
 class Plant():
 
-    def __init__(self, name: str, humidity: tuple, temperature: tuple, moisture: bool, sensor: DHT22):
+    def __init__(self, name: str, humidity: tuple, temperature: tuple, moisture: bool, sensor: DHT22, green: LED, blue: LED, red: LED):
         self.name = name
         self.humidity = humidity
         self.temperature = temperature
         self.moisture = moisture
         self.sensor = sensor
+        self.green = green
+        self.red = red
+        self.blue = blue
 
         assert temperature[0] < temperature[1], "The lower temperature threshold comes first"
 
@@ -27,20 +30,20 @@ class Plant():
             print("this is desired")
 
             LED.turn_off_all_leds()
-            green = LED(18, "green")
-            green.turn_on()
+            self.green.turn_on()
 
         elif current_temp < self.temperature[0]:
 
             print("this is too cold, the range is: ", self.temperature)
             self.heat_up(current_temp)
+            LED.turn_off_all_leds()
+            self.blue.turn_on()
 
         else:
             print("this is too hot, the range is: ", self.temperature)
             self.cool_down(current_temp)
             LED.turn_off_all_leds()
-            red = LED(23, "red")
-            red.turn_on()
+            self.red.turn_on()
 
     def check_humidity(self, current_humidity: float):
         """ Checks the humidity of the plant. Performs actions to bring the humidity within a specified range """

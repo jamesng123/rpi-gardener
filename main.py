@@ -24,6 +24,6 @@ def main(plant: Plant):
 
 if __name__ == '__main__':
     
-    basil = Plant("Basil", humidity=(15, 25), temperature=(15, 26.5), moisture=True, sensor=DHT22(4))
+    basil = Plant("Basil", humidity=(15, 25), temperature=(15, 26.5), moisture=True, sensor=DHT22(4), green=LED(18, "green"), blue=LED(24, "green"), red=LED(23, "red"))
 
     main(basil)
