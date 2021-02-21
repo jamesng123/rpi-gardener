@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 
-class MoistureSensor():
 
+class MoistureSensor:
     def __init__(self, gpio):
         self.gpio = gpio
 
@@ -16,6 +16,6 @@ class MoistureSensor():
         """ Returns True if the plant needs water and False if not """
 
         if GPIO.input(self.gpio):
-            return True
-        else:
             return False
+        else:
+            return True
