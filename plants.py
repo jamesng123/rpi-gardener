@@ -3,16 +3,17 @@ import RPi.GPIO as GPIO
 from LED import LED
 from water_pump import WaterPump
 from pigpio_dht import DHT22
+from moisture_sensor import MoistureSensor
 
 
 class Plant():
 
-    def __init__(self, name: str, humidity: tuple, temperature: tuple, moisture: bool, sensor: DHT22, green: LED, blue: LED, red: LED):
+    def __init__(self, name: str, humidity: tuple, temperature: tuple, moisture_sensor: MoistureSensor, temperature_sensor: DHT22, green: LED, blue: LED, red: LED):
         self.name = name
         self.humidity = humidity
         self.temperature = temperature
-        self.moisture = moisture
-        self.sensor = sensor
+        self.moisture_sensor = moisture_sensor
+        self.temperature_sensor = temperature_sensor
         self.green = green
         self.red = red
         self.blue = blue
@@ -29,8 +30,8 @@ class Plant():
             # This is the desired state
             print("this is desired")
 
-            LED.turn_off_all_leds()
-            self.green.turn_on()
+            # LED.turn_off_all_leds()
+            # self.green.turn_on()
 
         elif current_temp < self.temperature[0]:
 
@@ -57,12 +58,13 @@ class Plant():
             # TODO Implement logic for decreasing the humidity
             pass
 
-    def check_moisture(self, current_moisture: bool):
+    def check_moisture(self):
         """ Checks the moisture of the plant. Performs actions to bring the moisture within a specified range """
 
-        if self.moisture:
-            # Desired...
-            pass
+        if self.moisture_sensor.get_moisture_state():
+            print("No water needed, got plenty")
+            LED.turn_off_all_leds()
+            self.green.turn_on()
         else:
             self.water()
 

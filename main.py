@@ -3,11 +3,12 @@ from datetime import datetime
 import time, sys
 from plants import Plant
 from LED import LED
+from moisture_sensor import MoistureSensor
 
 def main(plant: Plant):
     while True:
         try:
-            result = plant.sensor.read()
+            result = plant.temperature_sensor.read()
             now = datetime.now()
             current_time = now.strftime("%H:%M:%S")
             f_data = f"Current Time: {current_time} - Temp: {result['temp_c']} - Humidity: {result['humidity']}\n"
@@ -16,6 +17,7 @@ def main(plant: Plant):
                 with open("data.txt", "a") as f:
                     f.write(f_data)
                 plant.check_temperature(result['temp_c'])
+                plant.check_moisture()
                 time.sleep(10)
         
         except KeyboardInterrupt:
@@ -24,6 +26,13 @@ def main(plant: Plant):
 
 if __name__ == '__main__':
     
-    basil = Plant("Basil", humidity=(15, 25), temperature=(15, 26.5), moisture=True, sensor=DHT22(4), green=LED(18, "green"), blue=LED(24, "green"), red=LED(23, "red"))
+    schefflera = Plant("schefflera", 
+                        humidity=(50, 90), 
+                        temperature=(12, 22), 
+                        moisture_sensor=MoistureSensor(22), 
+                        temperature_sensor=DHT22(4), 
+                        green=LED(18, "green"), 
+                        blue=LED(24, "green"), 
+                        red=LED(23, "red"))
 
-    main(basil)
+    main(schefflera)
