@@ -61,7 +61,7 @@ class Plant():
     def check_moisture(self):
         """ Checks the moisture of the plant. Performs actions to bring the moisture within a specified range """
 
-        if self.moisture_sensor.get_moisture_state():
+        if not self.moisture_sensor.get_moisture_state():
             print("No water needed, got plenty")
             LED.turn_off_all_leds()
             self.green.turn_on()
