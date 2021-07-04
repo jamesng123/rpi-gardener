@@ -30,9 +30,9 @@ if __name__ == '__main__':
                         humidity=(50, 90), 
                         temperature=(12, 22), 
                         moisture_sensor=MoistureSensor(26), 
-                        temperature_sensor=DHT22(4), 
-                        green=LED(18, "green"), 
-                        blue=LED(24, "green"), 
-                        red=LED(23, "red"))
+                        temperature_sensor=DHT22(17), 
+                        green=LED(3, "green"), 
+                        blue=LED(2, "blue"), 
+                        red=LED(4, "red"))
 
     main(schefflera)
