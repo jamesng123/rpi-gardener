@@ -1,21 +1,21 @@
 import RPi.GPIO as GPIO
+import time
+import board
+import busio
+import adafruit_ads1x15.ads1115 as ADS
+from adafruit_ads1x15.analog_in import AnalogIn
 
 
 class MoistureSensor:
-    def __init__(self, gpio):
-        self.gpio = gpio
+    def __init__(self, i2c_address):
 
-        # Initialse the GPIO pins and LEDs
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setwarnings(False)
+        # Create the I2C bus
+        i2c = busio.I2C(board.SCL, board.SDA)
+        self.i2c_address = i2c_address
 
-        GPIO.setup(self.gpio, GPIO.IN)
+        self.ads = ADS.ADS1115(i2c)
 
     def get_moisture_state(self):
+        chan = AnalogIn(self.ads, ADS.P0)
 
-        """ Returns True if the plant needs water and False if not """
-
-        if GPIO.input(self.gpio):
-            return False
-        else:
-            return True
+        return chan.value
